@@ -34,7 +34,7 @@ angular.module('dashboard')
                 self.chairman = true;
             }
         }
-
+/*
         function meetingStatusChanged(event) {
             $log.debug("meetingStatusCtrl: meetingStatusChanged");
             if (angular.isObject(event) && angular.isObject(self.meeting)) {
@@ -53,7 +53,7 @@ angular.module('dashboard')
                 }
             }
         }
-
+*/
         function proposalsStatusChanged(events) {
             $log.debug("meetingStatusCtrl: proposalsStatusChanged");
             if (angular.isArray(events) && angular.isObject(self.meeting) && angular.isArray(self.meeting.topicList)) {
@@ -76,7 +76,7 @@ angular.module('dashboard')
                 }
             }
         }
-
+/*
         function getEvents() {
             if (lastEventId && meetingItem.meetingGuid) {
                 var proposalEvents = [];
@@ -137,6 +137,198 @@ angular.module('dashboard')
                 $log.error("meetingStatusCtrl: getEvents invalid parameter:");
             }
         }
+*/
+        var fakeTopicGuid = 1;
+        function FakeTopic(ref, title, status, pub, remarks) {
+            var essi = "http://www.hel.fi/static/public/hela/Kaupunginvaltuusto/Suomi/Esitys/2016/Kanslia_2016-04-13_Kvsto_7_El/D2BA2366-B816-4051-8FD6-BDD17F2AC1AA/Kunnan_asukkaan_aloite_taloudellisten_resurssien_o.pdf";
+            return {
+                "topicreference": ref,
+                "presenterName": null,
+                "presenterabbr": "Sj",
+                "introducerId": "Kvsto",
+                "topicNumber": 1,
+                "topicGuid": "" + fakeTopicGuid++,
+                "sequencenumber": 1,
+                "publicity": pub,
+                "moment": 0,
+                "topicStatus": status,
+                "topicStatusText": "Käsittelyssä",
+                "title": title,
+                "includePublishedRemark": angular.isDefined(remarks) ? remarks : true,
+                "confidentiallityreason": "",
+                "confidentiallityreasonTranslatation": "",
+                "topicTitle": title,
+                "topicTitleTranslation": "title",
+                "isCreatedInMeeting": null,
+                "attachment": [
+                    {
+                        "attachmentGuid": "ac7c2906-1d36-468b-a884-2f7b994b8f75",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "link": "http://www.hel.fi/static/public/hela/Kaupunginvaltuusto/Suomi/Paatos/2016/Kanslia_2016-04-13_Kvsto_7_Pk/47C0456F-F043-47BD-AADE-2E9A1CDC8262/Liite.pdf",
+                        "number": 1,
+                        "title": "Helsingin seuraparlamentin kuntalaisaloite",
+                        "attachmentTitle": "Helsingin seuraparlamentin kuntalaisaloite",
+                        "mimeType": null,
+                        "publicDocumentExists": true
+                    },
+                    {
+                        "attachmentGuid": "ac7c2906-1d36-468b-a884-2f7b994b8f75",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "link": "http://www.hel.fi/static/public/hela/Kaupunginvaltuusto/Suomi/Paatos/2016/Kanslia_2016-04-13_Kvsto_7_Pk/47C0456F-F043-47BD-AADE-2E9A1CDC8262/Liite.pdf",
+                        "number": 2,
+                        "title": "Helsingin seuraparlamentin kuntalaisaloite",
+                        "attachmentTitle": "Oltkn lausunto.pdf",
+                        "mimeType": null,
+                        "publicDocumentExists": true
+                    },
+                    {
+                        "attachmentGuid": "ac7c2906-1d36-468b-a884-2f7b994b8f75",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "link": "http://www.hel.fi/static/public/hela/Kaupunginvaltuusto/Suomi/Esitys/2016/Kanslia_2016-04-13_Kvsto_7_El/D2BA2366-B816-4051-8FD6-BDD17F2AC1AA/Kunnan_asukkaan_aloite_taloudellisten_resurssien_o.pdf",
+                        "number": 3,
+                        "title": "Helsingin seuraparlamentin kuntalaisaloite",
+                        "attachmentTitle": "Lltkn lausunto.pdf",
+                        "mimeType": null,
+                        "publicDocumentExists": true
+                    }
+                ],
+                "esitykset": [
+                    {
+                        "number": null,
+                        "documentTitle": null,
+                        "documentGuid": "87adfc2a-326d-49a7-903f-c3a4180eb775",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "type": "application/pdf",
+                        "link": essi
+                    }
+                ],
+                "decision": [
+                    {
+                        "dokutyypit": 3,
+                        "decisionTitle": "Kaupunginhallitus 29.03.2016 § 268",
+                        "number": 1,
+                        "title": "Kaupunginhallitus 29.03.2016 § 268",
+                        "decisionGuid": "879b0dbf-bc44-4a4e-91c8-2663d23cd673",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "link": essi,
+                        "type": "application/pdf"
+                    },
+                    {
+                        "dokutyypit": 3,
+                        "decisionTitle": "Liikuntalautakunta 28.05.2015 § 114",
+                        "number": 2,
+                        "title": "Liikuntalautakunta 02.06.2011 58",
+                        "decisionGuid": "a86b4cec-580a-42d9-b1c2-3f657b1d535c",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "link": "http://wv0001121/Kokoussovellus/Meeting/DecisionHistory/a86b4cec-580a-42d9-b1c2-3f657b1d535c",
+                        "type": "application/pdf"
+                    },
+                    {
+                        "dokutyypit": 3,
+                        "decisionTitle": "Opetuslautakunta 26.05.2015 § 91",
+                        "number": 3,
+                        "title": "Liikuntalautakunta 01.06.2011 55",
+                        "decisionGuid": "5a92054a-0154-4bf4-b834-a51cfbe837da",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "link": "http://wv0001121/Kokoussovellus/Meeting/DecisionHistory/5a92054a-0154-4bf4-b834-a51cfbe837da",
+                        "type": "application/pdf"
+                    }
+                ],
+                "additionalMaterial": [
+                    {
+                        "dokutyypit": null,
+                        "additionalMaterialTitle": "oheismateriaali.pdf",
+                        "number": 1,
+                        "title": "oheism j.pdf",
+                        "additionalMaterialGuid": "14b951ae-c102-4da3-8b81-65cda8fc575a",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 1,
+                        "language": "fi-FI",
+                        "mimeType": null,
+                        "publicDocumentExists": true,
+                        "link": "http://wv0001121/Kokoussovellus/Meeting/AdditionalMaterial/14b951ae-c102-4da3-8b81-65cda8fc575a"
+                    },
+                    {
+                        "dokutyypit": null,
+                        "additionalMaterialTitle": "Materiaali salassa pidettävä (JulkL 24 1 mom 4 k.)",
+                        "number": 2,
+                        "title": "oheism sp.pdf",
+                        "additionalMaterialGuid": "f7be8774-104f-46a2-aa32-ddf3e9b083bc",
+                        "topicGuid": "6ea83676-5a70-4e4d-851d-b8f3494f61c4",
+                        "publicity": 2,
+                        "language": "fi-FI",
+                        "mimeType": null,
+                        "publicDocumentExists": false,
+                        "link": null
+                    }
+                ],
+                "presenterGuid": "38ba9817-5da5-4294-b088-bab42d215e48",
+                "titleTranslation": "SV V2 dokujen testi 1.1 MaE",
+                "chairmanGuid": null,
+                "secretaryGuid": null,
+                "chairmanName": " ",
+                "secretaryName": " ",
+                "language": "fi-FI",
+                "mixedLanguage": false
+            };
+        }
+
+        function FakeMtg(status) {
+            var res =
+                // {
+                //     "meta": {},
+                //     "objects": [
+                {
+                    "currentSecretary": null,
+                    "userPersonGuid": "926eee0b-8e94-4a14-beec-d9b60590547f",
+                    "meetingStatus": status,
+                    "topicStatus": 0,
+                    "lastEventId": 20208,
+                    "userRoleId": 2,
+                    "presentationPublicity": 0,
+                    "meetingStatusText": "Käynnissä",
+                    "meetingTitle": "Kaupunginvaltuusto 07 / 13.04.2016",
+                    "userPersonName": "Aaltio Elina",
+                    "selectedTopicGuid": null,
+                    "redirectContentName": null,
+                    "redirectContentData": null,
+                    "agencyHandlerLanguage": "fi",
+                    "topicList": [
+                        new FakeTopic("92 Pj/1", "Nimenhuuto, laillisuus ja päätösvaltaisuus", 4, 1, false),
+                        new FakeTopic("93 Pj/2", "Pöytäkirjan tarkastajien valinta ", 4, 1, false),
+                        new FakeTopic("93 Pj/3", "Kyselytunti", 4, 1, false),
+                        new FakeTopic("95 Sj/8", "Yhtenäisten peruskoulujen muodostaminen Vuosaaren alueelle", 3, 1),
+                        new FakeTopic("96 Kj/4", "Kunnan asukkaan aloite taloudellisten resurssien osoittamisesta koululiikunnan lisäämiseen", 2, 1),
+                        new FakeTopic("97 Stj/5", "Kunnan  asukkaan aloite vaikeavammaisten ihmisten aseman paranta-miseksi", 1, 1),
+                        new FakeTopic("97 Stj/6", "Kunnan asukkaan aloite veneiden talvisäilytyspaikoista", 1, 1),
+                        new FakeTopic("99 Sj/7", "Kunnan asukkaan aloite sotaorpojen maksuttomista uintilipuista", 1, 1),
+                        new FakeTopic("100 Kaj/9", "Kunnan asukkaan aloite asunnoista ja liiketiloista Puotilan ostoskeskuksen paikalle", 1, 1, false),
+                        new FakeTopic("101 Kaj/10", "Kunnan asukkaan aloite suomalaisen muotoilun edistämisestä maankäytön suunnittelun, kaavoituksen sekä rakennushankkeiden luvituksen ja toteutuksen yhteydessä ", 1, 1),
+                        new FakeTopic("102 Kaj/11", "Kunnan asukkaan aloite alueellisten poikkeamisten menetelmien kehittämiseksi korjausrakentamisen helpottamiseksi", 1, 1, false),
+                        new FakeTopic("", "-/12 Kokouksessa jätetyt aloitteet ", 1, 1, false)
+
+
+
+                    ]
+                };
+                //     ]
+                // };
+            return res;
+        }
 
         if (meetingItem) {
             self.meeting = null;
@@ -144,7 +336,8 @@ angular.module('dashboard')
             StorageSrv.deleteKey(CONST.KEY.TOPIC);
             AhjoMeetingSrv.getMeeting(meetingItem.meetingGuid).then(function (response) {
                 if (angular.isObject(response) && angular.isArray(response.objects) && response.objects.length) {
-                    self.meeting = response.objects[0];
+                    self.meeting1 = response.objects[0];
+                    self.meeting = new FakeMtg(3);
                     if (angular.isObject(self.meeting) && angular.isArray(self.meeting.topicList)) {
 
                         angular.forEach(self.meeting.topicList, function (topic) {
@@ -162,10 +355,10 @@ angular.module('dashboard')
                         }, this);
 
                         lastEventId = self.meeting.lastEventId; // 19734, 20281;
-                        $timeout.cancel(pollingTimer);
-                        pollingTimer = $timeout(function () {
-                            getEvents();
-                        }, CONST.POLLINGTIMEOUT);
+                        // $timeout.cancel(pollingTimer);
+                        // pollingTimer = $timeout(function() {
+                        //     getEvents();
+                        // }, CONST.POLLINGTIMEOUT);
                     }
                 }
             }, function (error) {
@@ -233,6 +426,8 @@ angular.module('dashboard')
 
 
         self.stringId = function (meeting) {
+            var tmp;
+            tmp = 1;
             for (var item in CONST.MTGSTATUS) {
                 if (CONST.MTGSTATUS.hasOwnProperty(item)) {
                     if (angular.isObject(meeting) && meeting.meetingStatus === CONST.MTGSTATUS[item].value) {

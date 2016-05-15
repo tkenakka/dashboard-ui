@@ -316,6 +316,7 @@ angular.module('dashboard')
                 if (angular.isObject(data) && angular.isObject(data.topic) && !angular.equals(topicGuid, data.topic.topicGuid)) {
                     personGuid = data.topic.userPersonGuid;
                     topicGuid = data.topic.topicGuid;
+                    topicGuid = "0f2e5037-a34d-4cf5-b5b7-2a6e0954c432"; // Test demo hack
                     isCityCouncil = data.topic.isCityCouncil;
                     getProposals(topicGuid);
                     setTypes();

@@ -101,8 +101,85 @@ angular.module('dashboard')
                 }
             }
 
+            function FakeMtg(title, date, status, type) {
+                return {
+                    "agencyHandlerLanguage": "fi",
+                    "updatedDateTime": "0001-01-01T00:00:00",
+                    "meetingNumber": 12,
+                    "meetingGuid": "dfe01535-cd69-4228-9dfb-5831e0060e43",
+                    "name": title,
+                    "meetingID": null,
+                    "meetingDate": date,
+                    "meetingTime": date,
+                    "meetingType_ID": 1,
+                    "state": status,
+                    "startDateTime": date,//"2016-03-30T09:00:00.0",
+                    "endDateTime": null,
+                    "agencyGuid": "02900",
+                    "agencyName": type,
+                    "agencyNameSV": "Stadsfullmäktige",
+                    "agendaGuid": null,
+                    "agendaGuidSwe": null,
+                    "articleNumber": null,
+                    "language": "fi",
+                    "isSaliEnabled": true,
+                    "isSaliSynced": false,
+                    "isMultiLanguage": true,
+                    "currentSecretaryGuid": null,
+                    "location": null,
+                    "roleIDs": [
+                        {
+                            "IsDeputy": true,
+                            "IsPresent": false,
+                            "RoleID": 2,
+                            "RoleName": "Päätösvaltainen osallistuja"
+                        }
+                    ],
+                    "isDeputy": null,
+                    "isPresent": false
+                };
+            }
+
+            function getFakeMtgs() {
+                return {
+                    "meta": {},
+                    "objects": [
+
+                        new FakeMtg('Kaupunginvaltuusto 09 / 11.05.2016', "2016-04-13T09:00:00.0", 1, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 08 / 27.04.2016', "2016-04-13T09:00:00.0", 1, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 07 / 13.04.2016', "2016-04-13T09:00:00.0", 3, "Kaupunginvaltuusto"),
+
+                        new FakeMtg('Kaupunginvaltuusto 06 / 30.03.2016', "2016-03-30T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 05 / 16.03.2016', "2016-03-16T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 04 / 02.03.2016', "2016-03-02T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 03 / 17.02.2016', "2016-02-17T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 02 / 03.02.2016', "2016-02-03T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 01 / 20.01.2016', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+
+                        new FakeMtg('Kaupunginvaltuusto 21 / 09.12.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 20 / 02.12.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 19 / 25.11.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 18 / 11.11.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 17 / 04.11.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 16 / 21.10.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 15 / 07.10.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+                        new FakeMtg('Kaupunginvaltuusto 14 / 23.09.2015', "2016-01-20T09:00:00.0", 7, "Kaupunginvaltuusto"),
+
+
+                        new FakeMtg('Asuntolautakunta 03 / 31.03.2016', "2016-03-31T09:00:00.0", 1, "Asuntolautakunta"),
+                        new FakeMtg('Asuntolautakunta 02 / 18.02.2016', "2016-02-18T09:00:00.0", 1, "Asuntolautakunta"),
+                        new FakeMtg('Asuntolautakunta 01 / 21.01.2016', "2016-01-21T09:00:00.0", 7, "Asuntolautakunta"),
+                        new FakeMtg('Eläintarhan johtokunta 01 / 21.01.2016', "2016-01-21T09:00:00.0", 1, "Eläintarhan johtokunta"),
+                        new FakeMtg('Eläintarhan johtokunta 01 / 07.01.2016', "2016-01-07:00:00.0", 5, "Eläintarhan johtokunta")
+
+                    ]
+                };
+
+            }
+
             AhjoMeetingsSrv.getMeetings().then(function(response) {
-                self.responseData = response;
+                self.responseData1 = response;
+                self.responseData = getFakeMtgs();
                 if ("objects" in self.responseData) {
                     $log.debug("adMeetings: getMeetings done: " + self.responseData.objects.length);
                 }
