@@ -205,6 +205,10 @@ body {
     .db-badge-gre {
         @extend .db-badge;
         background-color: $db-color-success;
+        color: $badge-font-color;
+        h1, h2, h3, h4, h5 {
+            color: $badge-font-color;
+        }
     }
 
     .db-badge-dark {
