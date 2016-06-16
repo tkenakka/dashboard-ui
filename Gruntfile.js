@@ -279,7 +279,8 @@ module.exports = function (grunt) {
                     html: {
                         steps: {
                             js: ['concat', 'uglifyjs'],
-                            css: ['cssmin']
+                            css: ['cssmin'],
+                            html: ['concat']
                         },
                         post: {}
                     }
@@ -383,7 +384,10 @@ module.exports = function (grunt) {
                     usemin: 'scripts/scripts.js'
                 },
                 cwd: '<%= yeoman.app %>',
-                src: 'views/{,*/}*.html',
+                src: [
+                    'views/{,*/}*.html',
+                    'directives/{,*/}*.html'
+                ],
                 dest: '.tmp/templateCache.js'
             }
         },
@@ -423,12 +427,14 @@ module.exports = function (grunt) {
                         'images/{,*/}*.{webp}',
                         'styles/fonts/{,*/}*.*'
                     ]
-                },{ // Copy only directive templates to dist, .js already concatenated to main.js
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/directives',
-                    src: '**/*.html',
-                    dest: '<%= yeoman.dist %>/directives'
-                },{
+                },
+                    // { // Copy only directive templates to dist, .js already concatenated to main.js
+                    // expand: true,
+                    // cwd: '<%= yeoman.app %>/directives',
+                    // src: '**/*.html',
+                    // dest: '<%= yeoman.dist %>/directives'
+                    // },
+                {
                     expand: true,
                     cwd: '<%= yeoman.app %>/loc',
                     src: '**/*.json',
