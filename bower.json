@@ -16,6 +16,7 @@
     "ngToast": "ngtoast#^2.0.0",
     "angular-spinner": "^0.8.1",
     "angular-elastic": "^2.5.1",
+    "angular-file-saver": "^1.1.2"
     "ng-focus-if": "^1.0.7"
   },
   "devDependencies": {

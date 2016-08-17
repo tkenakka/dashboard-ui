@@ -12,7 +12,7 @@
 * Service in the dashboard.
 */
 angular.module('dashboard')
-    .factory('Utils', function ($log, $window, CONST, AttachmentData) {
+    .factory('Utils', function ($log, $window, CONST, AttachmentData, $timeout, $http, $q, FileSaver, Blob) {
         var Utils = {};
 
         Utils.isResoXs = function (argUa) {
@@ -96,15 +96,70 @@ angular.module('dashboard')
             return res;
         };
 
-        Utils.openNewWin = function (aUrl) {
-            if (angular.isString(aUrl) && aUrl.length) {
-                $log.debug("Utils.openNewWin: " + aUrl);
-                $window.open(aUrl, '_blank');
+
+        Utils.saveFile = function (aUrl, fn) {
+            $log.debug("Utils.savePdf: " + aUrl);
+            var navigator = $window.navigator;
+            if (navigator.msSaveBlob) {
+                navigator.msSaveBlob(aUrl, fn);
             }
             else {
-                $log.error("Utils.openNewWin: ignored due to bad url " + aUrl);
+                // Try using other saveBlob implementations, if available
+                var saveBlob = navigator.webkitSaveBlob || navigator.mozSaveBlob || navigator.saveBlob;
+                if (saveBlob === undefined) {
+                    console.log("Not supported");
+                }
+                saveBlob(aUrl, fn);
+
+                // var element = document.createElement('a');
+                // element.href = aUrl;
+                // element.setAttribute('download', aFn);
+                // document.body.appendChild(element); //Append the element to work in firefox
+                // (element[0] || element).click();
             }
         };
 
-        return Utils;
-    });
+            Utils.savePdf = function (aUrl) {
+                $log.debug("Utils.savePdf: " + aUrl);
+                var deferred = $q.defer();
+                $timeout(function () {
+                    deferred.notify({});
+                    $http({
+                        method: 'GET',
+                        cache: false,
+                        url: aUrl,
+                        responseType: 'arraybuffer'
+                    }).then(function (response) {
+
+                        var blob = null;
+                        if (response) {
+                            blob = new Blob([response.data], { type: 'application/pdf' });
+                            $log.debug("Utils.savePdf: FileSaver");
+                            FileSaver.saveAs(blob, 'terve1.pdf');
+                            // var blobUrl = URL.createObjectURL(blob);
+                            // Utils.saveFile(blobUrl, "terve.pdf");
+                        } else {
+                            $log.error("Utils.savePdf: null blob");
+                        }
+                        deferred.resolve(blob);
+                    }, function (error) {
+                        $log.error("Utils.savePdf: " + error);
+                        deferred.reject(error);
+                    });
+                }, 0);
+
+                return deferred.promise;
+            };
+
+            Utils.openNewWin = function (aUrl) {
+                Utils.savePdf(aUrl);
+                // if (angular.isString(aUrl) && aUrl.length) {
+                //     $log.debug("Utils.openNewWin: " + aUrl);
+                //     $window.open(aUrl, '_blank');
+                // }
+                // else {
+                //     $log.error("Utils.openNewWin: ignored due to bad url " + aUrl);
+                // }
+            };
+            return Utils;
+        });

@@ -23,7 +23,8 @@ angular.module('dashboard', [
     'angularSpinner',
     'monospaced.elastic',
     'focus-if',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'ngFileSaver'
 ])
     .config(function ($urlRouterProvider, $stateProvider, ENV, G_APP, $logProvider, $provide, $compileProvider, $translateProvider, $httpProvider, $uibTooltipProvider) {
         // Startup logged always regardless of ENV config, so using console instead of $log

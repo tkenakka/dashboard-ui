@@ -37,6 +37,9 @@ module.exports = function(config) {
       'bower_components/angular-spinner/angular-spinner.js',
       'bower_components/angular-elastic/elastic.js',
       'bower_components/ng-focus-if/focusIf.js',
+      'bower_components/blob-polyfill/Blob.js',
+      'bower_components/file-saver.js/FileSaver.js',
+      'bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/app.js",
