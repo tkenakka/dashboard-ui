@@ -46,6 +46,11 @@
             </div>
 
         </div>
+
+        <div ng-if="c.pm === c.pms.HIDDEN">
+            <a href="{{c.tData.link}}" download="tiedostonnimi" target="_blank"><span translate>STR_TOPIC_DOWNLOAD</span></a>
+        </div>
+
         <!-- PRIMARY BLOCK END -->
 
         <!-- SECONDARY BLOCK START -->
@@ -65,10 +70,10 @@
                     ng-disabled="parallelMode" ng-click="c.secondaryClicked()">
                     <span class="glyphicon ng-class:[{'glyphicon-minus':c.bm === c.bms.SECONDARY},{'glyphicon-plus':c.bm !== c.bms.SECONDARY}]"></span>
                 </button>
-                <button ng-if="c.pm === c.pms.HIDDEN" type="button" class="btn btn-block db-btn-sel db-btn-big db-brd-all ng-class:[{'db-margin-2':!c.isMobile},{'active':c.sm === c.sms.SECRET}]"
+                <!--<button ng-if="c.pm === c.pms.HIDDEN" type="button" class="btn btn-block db-btn-sel db-btn-big db-brd-all ng-class:[{'db-margin-2':!c.isMobile},{'active':c.sm === c.sms.SECRET}]"
                     ng-disabled="!c.tData.link" ng-click="c.presentationClicked(c.tData)">
                     <span translate translate-cloak>STR_PRESENTATION</span>
-                </button>
+                </button>-->
                 <button type="button" class="btn btn-block db-btn-sel db-btn-big db-brd-all ng-class:[{'active':c.sm === c.sms.ATTACHMENTS},{'db-margin-2':!c.isMobile}]"
                     ng-disabled="!c.materialCount()" db-confirm confirm-enabled="c.hasUnsavedProposal || c.remarkIsUnsaved" confirm-config="c.unsavedConfig"
                     ng-click="c.attachmentClicked()">
