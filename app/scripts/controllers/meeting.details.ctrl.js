@@ -345,6 +345,22 @@ angular.module('dashboard')
             $rootScope.$emit(CONST.UNSAVEMEETINGDDATA, (self.hasUnsavedProposal || self.remarkIsUnsaved));
         });
 
+        self.hackRemoveMotion = function hackRemoveMotion() {
+            $timeout(function () {
+                var data = StorageSrv.getKey(CONST.KEY.MOTION_DATA);
+                if (angular.isObject(data)) {
+                    if (angular.isArray(data.objects)) {
+                        // data.objects.splice(0, 1);
+                        // StorageSrv.setKey(CONST.KEY.MOTION_DATA, data);
+
+                        var newData = angular.copy(data);
+                        newData.objects.splice(0, 1);
+                        StorageSrv.setKey(CONST.KEY.MOTION_DATA, newData);
+                    }
+                }
+            }, 4000);
+        };
+
         var unsavedRemarkWatcher = $rootScope.$on(CONST.REMARKISUNSAVED, function (event, isUnsaved) {
             self.remarkIsUnsaved = isUnsaved ? true : false;
             $rootScope.$emit(CONST.UNSAVEMEETINGDDATA, (self.hasUnsavedProposal || self.remarkIsUnsaved));
