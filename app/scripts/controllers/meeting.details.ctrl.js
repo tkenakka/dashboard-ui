@@ -322,7 +322,7 @@ angular.module('dashboard')
             if (parallel) {
                 setBlockMode(CONST.BLOCKMODE.DEFAULT);
             }
-            });
+        });
 
 
         $scope.$watch(function () {
@@ -346,6 +346,38 @@ angular.module('dashboard')
             self.hasUnsavedProposal = hasUnsaved ? true : false;
             $rootScope.$emit(CONST.UNSAVEMEETINGDDATA, (self.hasUnsavedProposal || self.remarkIsUnsaved));
         });
+
+        self.hackRemoveMotion = function hackRemoveMotion() { // Debug function to simulate removed motion. Not to be merged to upstream.
+            $timeout(function () {
+                var data = StorageSrv.getKey(CONST.KEY.MOTION_DATA);
+                if (angular.isObject(data)) {
+                    if (angular.isArray(data.objects)) {
+                        $log.debug("hackRemoveMotion: removing: ", data.objects[0], "from :", data.objects);
+
+                        // Approach 1: modify storagesrv data directly
+                        data.objects.splice(0, 1);
+                        StorageSrv.setKey(CONST.KEY.MOTION_DATA, data);
+
+
+                        // Approach 2: create a copy and replace storagesrv data instance
+                        // var newData = angular.copy(data);
+                        // newData.objects.splice(0, 1);
+                        // StorageSrv.setKey(CONST.KEY.MOTION_DATA, newData);
+                    }
+                }
+            }, 1000);
+        };
+
+        self.hackAddMotion = function hackAddMotion() { // Debug function to simulate added motion. Not to be merged to upstream.
+            $timeout(function () {
+                var data = StorageSrv.getKey(CONST.KEY.MOTION_DATA);
+                var newMotion = angular.copy(data.objects[data.objects.length - 1]);
+                newMotion.title = "Test hack added copy motion from first in array";
+                $log.debug("hackAddMotion: adding: ", newMotion);
+                data.objects.push(newMotion);
+                StorageSrv.setKey(CONST.KEY.MOTION_DATA, data);
+            }, 3000);
+        };
 
         var unsavedRemarkWatcher = $rootScope.$on(CONST.REMARKISUNSAVED, function (event, isUnsaved) {
             self.remarkIsUnsaved = isUnsaved ? true : false;
