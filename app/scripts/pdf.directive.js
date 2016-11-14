@@ -12,22 +12,52 @@
  */
 angular.module('dashboard')
     .directive('dbPdf', ['$rootScope', 'CONST', '$log', '$compile', function ($rootScope, CONST, $log, $compile) {
+        var noContentUri = 'no.content.html';
+        var params = "secondary=false&amp;mixed=false#view=FitH&amp;toolbar=0&amp;statusbar=0&amp;messages=0&amp;navpanes=0";
+
+        function paramSeparator(uri) {
+            return angular.isString(uri) && (CONST.NOTFOUND !== uri.indexOf('?')) ? '&' : '?';
+        }
+
+        // var ctrl = ['$log', '$scope', '$sce', function ($log, $scope, $sce) {
+        //     $log.log("dbPdf.CONTROLLER");
+        //     var self = this;
+
+
+        //     function composeUrl(aUrl) {
+        //         var res = noContentUri;
+        //         if (angular.isString(aUrl.uri) && aUrl.uri.length) {
+        //             res = aUrl.uri + paramSeparator(aUrl.uri) + params;
+        //         }
+        //         $log.debug("dbPdf.composeUrl: " + res);
+        //         return res;
+        //     }
+
+        //     $scope.$watch(
+        //         function () {
+        //             return { uri: $scope.uri };
+        //         },
+        //         function (aNew) {
+        //             self.uri = $sce.trustAsResourceUrl(composeUrl(aNew));
+        //             // $log.debug("dbPdf.watch: new resolved uri:" + self.uri);
+        //         },
+        //         true
+        //     );
+        // }];
+
         return {
             scope: {
                 uri: '='
             },
+            // controller: ctrl,
+            // controllerAs: 'c',
             template: '<div></div>',
+            // template: '<iframe ng-attr-src="{{c.uri}}"></iframe>',
             restrict: 'AE',
             replace: 'true',
             link: function (scope, element/*, attrs*/) {
 
-                var params = "secondary=false&amp;mixed=false#view=FitH&amp;toolbar=0&amp;statusbar=0&amp;messages=0&amp;navpanes=0";
-                var noContentUri = 'no.content.html';
                 element.addClass('db-directive');
-
-                function paramSeparator(uri) {
-                    return angular.isString(uri) && (CONST.NOTFOUND !== uri.indexOf('?')) ? '&' : '?';
-                }
 
                 function hide() {
                     element.removeClass('db-visible-pdf');
